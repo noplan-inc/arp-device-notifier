@@ -1,0 +1,18 @@
+### https://raw.github.com/github/gitignore/37abd930a6893fd3a716c48934e704795bc2a45c/Go.gitignore
+
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+./arp-device-notifier
+
+.idea
