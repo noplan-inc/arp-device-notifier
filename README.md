@@ -23,7 +23,7 @@ $ arp-device-notifier post -e http://example.com
 
 ### Verbose
 ```bash
-arp-device-notifier pst -e http://example.com -v
+arp-device-notifier post -e http://example.com -v
 ```
 ### Post Interval(default is 10s)
 ```bash
