@@ -17,4 +17,4 @@
 
 .idea
 arp-device-notifier
-.dist/
+dist
