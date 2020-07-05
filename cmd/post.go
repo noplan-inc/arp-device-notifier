@@ -16,34 +16,50 @@ limitations under the License.
 package cmd
 
 import (
+	"github.com/noplan-inc/arp-device-notifier/lib"
 	"github.com/spf13/cobra"
+	"log"
+	"net/url"
+)
+
+var (
+	o = &lib.PostOptions{}
 )
 
 // postCmd represents the post command
 var postCmd = &cobra.Command{
 	Use:   "post",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
+	Short: "It is a tool to get a list of devices by Arp protocol and request it to the server.",
+	Long: `It is a tool to get a list of devices by Arp protocol and request it to the server. For example:
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+## Normal
+arp-device-notifier -e http://example.com
+
+## Verbose
+arp-device-notifier -e http://example.com -v
+
+## Post Interval(default is 10s)
+arp-device-notifier -e http://example.com -i 3
+`,
 	Run: func(cmd *cobra.Command, args []string) {
-
+		validateOptions()
+		lib.Run(o)
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(postCmd)
+	postCmd.Flags().StringVarP(&o.Endpoint, "endpoint", "e", "", "A endpoint to send request")
+	postCmd.Flags().StringVarP(&o.Authorization, "authorization", "a", "", "A request header to be used for authorization")
+	postCmd.Flags().Int64VarP(&o.PostInterval, "post-interval", "i", 10, "Update interval in seconds")
+	postCmd.Flags().BoolVarP(&o.Verbose, "verbose", "v", false, "Print debugging messages about its progress")
 
-	// Here you will define your flags and configuration settings.
+	// Required Options
+	postCmd.MarkFlagRequired("endpoint")
+}
 
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// postCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// postCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+func validateOptions() {
+	if _, err := url.ParseRequestURI(o.Endpoint); err != nil {
+		log.Fatalf("%s is invalid URL", o.Endpoint)
+	}
 }
