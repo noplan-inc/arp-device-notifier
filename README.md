@@ -31,7 +31,7 @@ $ arp-device-notifier post -e http://example.com -i 3
 ```
 ### Authorization Header
 ```bash
-$ arp-device-notifier post -e http://example.com -a 'Bearer \<token>'
+$ arp-device-notifier post -e http://example.com -a 'Bearer <token>'
 ```
 
 
