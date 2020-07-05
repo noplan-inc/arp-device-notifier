@@ -3,7 +3,9 @@ module github.com/noplan-inc/arp-device-notifier
 go 1.14
 
 require (
+	github.com/chrismarget/arp v0.0.0-20170424181311-541a2129847a
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
+	github.com/google/gopacket v1.1.17 // indirect
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/mitchellh/mapstructure v1.3.2 // indirect
 	github.com/pelletier/go-toml v1.8.0 // indirect
